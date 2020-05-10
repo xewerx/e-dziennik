@@ -1,0 +1,16 @@
+body {
+  height: 100%;
+  background-image: url(assets/background.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+}
+
+app-footer {
+  width: 100%;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  padding: 1%;
+  background-color: rgb(73, 73, 78);
+}
