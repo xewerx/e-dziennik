@@ -7,4 +7,4 @@ const userSchema = new Schema({
     password: String,
 });
 
-module.exports = mongoose.model('user', userSchema, 'IA');
+module.exports = mongoose.model('user', userSchema, 'users');

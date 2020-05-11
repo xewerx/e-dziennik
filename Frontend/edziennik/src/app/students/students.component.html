@@ -1,0 +1,36 @@
+<div class="container">
+  <table class="table">
+    <thead class="thead-dark">
+      <tr>
+        <th scope="col">Nr</th>
+        <th scope="col">Imię</th>
+        <th scope="col">Nazwisko</th>
+        <th scope="col">Oceny</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let student of students; let nr = index">
+        <tr>
+          <th scope="row">{{nr+1}}</th>
+          <td>{{student.name}}</td>
+          <td>{{student.surname}}</td>
+          <ng-container *ngFor="let value of student.ratings">
+            <td [for]="value.for" appShowRating>{{value.value}}</td>
+          </ng-container>
+          <div class="ikons">
+            <div (click)="addRating(nr)" class="btn add"></div>
+            <div (click)="editRating(student.login)" class="btn edit"></div>
+            <div (click)="deleteRating(student.login)" class="btn delete"></div>
+          </div>
+          <div class="inputs" [hidden]="isVisible[nr]">
+            <span>Ocena: </span><textarea [(ngModel)]="value[nr]"></textarea>
+            <span>Temat: </span><textarea [(ngModel)]="for[nr]" class="wider"></textarea>
+            <div (click)="saveRating(student.login, nr)" class="btn">Zapisz</div>
+          </div>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+
+</div>
