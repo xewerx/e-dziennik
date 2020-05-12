@@ -33,4 +33,5 @@ app-students {
   position: absolute;
   top: 25vh;
   left: 31vw;
+  font-family: "DM Mono", monospace;
 }

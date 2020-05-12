@@ -6,7 +6,11 @@ const studentsSchema = new Schema({
     login: String,
     name: String,
     surname: String,
-    raiting: Object
+    ratings:[{
+        for: String,
+        value: Number,
+        date: Date
+    }]
 });
 
 module.exports = mongoose.model('students', studentsSchema, 'IA');

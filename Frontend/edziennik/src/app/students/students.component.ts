@@ -13,6 +13,7 @@ export class StudentsComponent implements OnInit {
   for = [];
   value = [];
 
+
   constructor(private service: AuthService) {}
 
   ngOnInit(): void {
@@ -23,10 +24,10 @@ export class StudentsComponent implements OnInit {
     this.service.getStudents().subscribe(
       (res) => {
         this.students = res;
+        console.log(this.students);
         for (let i = 0; i < this.students.length; i++) {
           this.isVisible[i] = true;
         }
-        console.log(this.students.length);
       },
       (err) => console.log(err)
     );
@@ -36,26 +37,21 @@ export class StudentsComponent implements OnInit {
     this.isVisible[index] = !this.isVisible[index];
   }
 
-  saveRating(login: string, index: number) {
-    console.log(this.value[index]);
-    console.log(this.for[index]);
+  saveRating(loginAdd: string, index: number) {
+    this.isVisible[index] = !this.isVisible[index];
+    const addData = {login: loginAdd, forAdd: this.for[index], ratingAdd: this.value[index]};
 
-    /*this.service.addRating('').subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    ); */
-  }
-  editRating(login: string) {
-    this.service.editRating(login).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+    this.service.addRating(addData).subscribe(
+      (res) => {
+        console.log(res);
+      },
+      (err) => {
+        console.log(err);
+      }
     );
+    window.location.reload();
   }
 
-  deleteRating(login: string) {
-    this.service.deleteRating(login).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    );
-  }
 }
+
+

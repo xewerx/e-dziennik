@@ -24,16 +24,20 @@ export class AuthService {
     return this.http.get<any>(this.getStudentsUrl);
   }
 
-  addRating(login: string): Observable<any> {
-    return this.http.post<any>(this.addStudentUrl, login);
+  addRating(data: object): Observable<any> {
+    return this.http.post<any>(this.addStudentUrl, data);
   }
 
-  editRating(login: string): Observable<any> {
-    return this.http.put<any>(this.editStudentUrl, login);
+  editRating(id: string, rating: number): Observable<any> {
+    const data = {
+      idEdit: id,
+      ratingEdit: rating
+    };
+    return this.http.put<any>(this.editStudentUrl, data);
   }
 
-  deleteRating(login: string): Observable<any> {
-    const parm = new HttpParams().set('login', login + '' );
-    return this.http.delete<any>(this.deleteStudentUrl, { params: parm });
+  deleteRating(id: string): Observable<any> {
+    const idDelete = new HttpParams().set('login', id + '' );
+    return this.http.delete<any>(this.deleteStudentUrl, { params: idDelete });
   }
 }

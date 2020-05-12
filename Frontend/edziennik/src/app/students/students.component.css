@@ -28,8 +28,9 @@ textarea {
   border: 1px solid #ccc;
   box-shadow: 1px 1px 1px #999;
   width: 2vw;
-  height: 4vh;
+  height: 3vh;
   resize: none;
+  overflow: hidden;
 }
 
 .wider {
@@ -39,12 +40,11 @@ textarea {
 .ikons {
   display: inline-block;
   position: relative;
-  bottom: 1vh;
+
 }
 
 span{
   position: relative;
-  bottom: 1vh;
   margin-left: 0.5vw;
 }
 
