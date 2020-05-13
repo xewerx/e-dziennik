@@ -30,8 +30,9 @@ app-login {
 }
 
 app-students {
-  position: absolute;
+  position: relative;
   top: 25vh;
-  left: 31vw;
+  margin-left: auto;
+  margin-right: auto;
   font-family: "DM Mono", monospace;
 }

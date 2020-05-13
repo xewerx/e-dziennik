@@ -1,6 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
+const jwt = require('jsonwebtoken');
 const User = require("../models/user");
 const Students = require("../models/students");
 
@@ -19,7 +20,23 @@ mongoose.connect(
   }
 );
 
-router.get("/students", (req, res) => {
+function verifyToken(req, res, next) {
+  if(!req.headers.authorization) {
+    return res.status(401).send('Unauthorized request')
+  }
+  let token = req.headers.authorization.split(' ')[1]
+  if(token === 'null') {
+    return res.status(401).send('Unauthorized request')    
+  }
+  let payload = jwt.verify(token, 'verySecretKey')
+  if(!payload) {
+    return res.status(401).send('Unauthorized request')    
+  }
+  req.userId = payload.subject
+  next()
+} 
+
+router.get("/students", verifyToken, (req, res) => {
   Students.find({}).then((data) => {
     res.jsonp(data);
   });
@@ -62,10 +79,20 @@ router.post("/students/add", (req, res) => {
   });
 });
 
+router.delete("/students/delete", (req, res) => {
+  console.log(req.body);
+  Students.updateOne({ login: req.body.login }, {$pull: {ratings: {_id: req.body.id}}},(err, user) => {
+      console.log(err);  
+      console.log(user);
+      
+  })
+  
+
+});
+
 router.post("/login", (req, res) => {
   let userData = req.body;
   User.findOne({ login: userData.login }, (err, user) => {
-    console.log(user);
     if (err) {
       console.log(err);
     } else {
@@ -74,7 +101,9 @@ router.post("/login", (req, res) => {
       } else if (user.password !== userData.password) {
         res.status(401).send("Invalid Password");
       } else {
-        res.status(200).send(user);
+        let payload = { subject: userData._id};
+        let token = jwt.sign(payload, 'verySecretKey');
+        res.status(200).send({token});
       }
     }
   });

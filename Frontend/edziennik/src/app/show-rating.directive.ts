@@ -13,25 +13,20 @@ export class ShowRatingDirective {
   private for = '';
 
   @Input()
-  private id = '';
+  private idRating = '';
+
+  @Input()
+  private login = '';
 
   private paragraph: any;
-  private editButton: any;
   private deleteButton: any;
 
-  editButtonFunction = () => {
-    this.service.editRating(this.id, 4).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }
+  private yes: any;
+  private question: any;
+
 
   deleteButtonFunction = () =>  {
-    this.service.deleteRating(this.id).subscribe(
+    this.service.deleteRating(this.idRating, this.login).subscribe(
       (res) => {
         console.log(res);
       },
@@ -39,14 +34,24 @@ export class ShowRatingDirective {
         console.log(err);
       }
     );
+    window.location.reload();
+    this.yes.removeEventListener('click', this.deleteButtonFunction);
+  }
+
+  showDeleteConfirm = () => {
+    this.question = this.renderer.createElement('p');
+    this.yes = this.renderer.createElement('button');
+    this.question.innerHTML = 'Usunąć ocenę ?';
+    this.yes.innerHTML = 'Usuń';
+    this.renderer.appendChild(this.el.nativeElement, this.question);
+    this.renderer.appendChild(this.el.nativeElement, this.yes);
+    this.yes.addEventListener('click', this.deleteButtonFunction);
+    this.deleteButton.removeEventListener('click', this.showDeleteConfirm);
   }
 
   constructor(private service: AuthService, private el: ElementRef, private renderer: Renderer2) {
     this.paragraph = this.renderer.createElement('p');
-    this.editButton = this.renderer.createElement('div');
     this.deleteButton = this.renderer.createElement('div');
-    this.editButton.classList.add('btn');
-    this.editButton.classList.add('edit');
     this.deleteButton.classList.add('btn');
     this.deleteButton.classList.add('delete');
   }
@@ -55,19 +60,17 @@ export class ShowRatingDirective {
   mouseenter(event: Event) {
     this.paragraph.innerHTML = this.for + ' ' + this.date.slice(0, 10);
     this.renderer.appendChild(this.el.nativeElement, this.paragraph);
-    this.renderer.appendChild(this.el.nativeElement, this.editButton);
     this.renderer.appendChild(this.el.nativeElement, this.deleteButton);
-    this.deleteButton.addEventListener('click', this.deleteButtonFunction);
-    this.editButton.addEventListener('click', this.editButtonFunction);
+    this.deleteButton.addEventListener('click', this.showDeleteConfirm);
   }
 
   @HostListener('mouseleave')
   mouseleave(event: Event) {
     this.renderer.removeChild(this.el.nativeElement, this.paragraph);
-    this.renderer.removeChild(this.el.nativeElement, this.editButton);
     this.renderer.removeChild(this.el.nativeElement, this.deleteButton);
-    this.deleteButton.removeEvenListener('click');
-    this.editButton.removeEvenListener('click');
+    this.renderer.removeChild(this.el.nativeElement, this.question);
+    this.renderer.removeChild(this.el.nativeElement, this.yes);
+    this.deleteButton.removeEventListener('click', this.showDeleteConfirm);
   }
 
 }

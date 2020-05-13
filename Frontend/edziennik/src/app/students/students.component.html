@@ -1,3 +1,5 @@
+<button class="btn">Wyloguj się!</button>
+
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -27,10 +29,13 @@
           <td>{{ student.name }}</td>
           <td>{{ student.surname }}</td>
           <ng-container *ngFor="let value of student.ratings">
-            <td [for]="value.for" [date]="value.date" [id]="value._id" appShowRating>{{ value.value }}</td>
+            <td [for]="value.for" [date]="value.date" [idRating]="value._id" [login]="student.login" appShowRating>{{ value.value }}</td>
           </ng-container>
         </tr>
       </ng-container>
     </tbody>
   </table>
 </div>
+
+
+

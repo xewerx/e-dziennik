@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -28,16 +28,26 @@ export class AuthService {
     return this.http.post<any>(this.addStudentUrl, data);
   }
 
-  editRating(id: string, rating: number): Observable<any> {
-    const data = {
-      idEdit: id,
-      ratingEdit: rating
+  deleteRating(idDelete: string, loginDelete: string): Observable<any> {
+
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      }),
+      body: {
+        id: idDelete,
+        login: loginDelete,
+      },
     };
-    return this.http.put<any>(this.editStudentUrl, data);
+
+    return this.http.delete<any>(this.deleteStudentUrl, options);
   }
 
-  deleteRating(id: string): Observable<any> {
-    const idDelete = new HttpParams().set('login', id + '' );
-    return this.http.delete<any>(this.deleteStudentUrl, { params: idDelete });
+  loggedIn() {
+    return !!localStorage.getItem('token');
+  }
+
+  getToken() {
+    return localStorage.getItem('token');
   }
 }

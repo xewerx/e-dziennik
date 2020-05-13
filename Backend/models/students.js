@@ -8,7 +8,7 @@ const studentsSchema = new Schema({
     surname: String,
     ratings:[{
         for: String,
-        value: Number,
+        value: String,
         date: Date
     }]
 });

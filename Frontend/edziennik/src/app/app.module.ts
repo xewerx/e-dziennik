@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
 
+
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavbarComponent } from './navbar/navbar.component';
@@ -13,6 +14,8 @@ import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentsComponent } from './students/students.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShowRatingDirective } from './show-rating.directive';
+import { AuthGuard } from './auth.guard';
+import { TokenInterceptorService } from './token-interceptor.service';
 
 
 @NgModule({
@@ -31,7 +34,12 @@ import { ShowRatingDirective } from './show-rating.directive';
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, AuthGuard,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: TokenInterceptorService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

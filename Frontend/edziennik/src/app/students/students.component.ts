@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../auth.service';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-students',
@@ -14,7 +16,7 @@ export class StudentsComponent implements OnInit {
   value = [];
 
 
-  constructor(private service: AuthService) {}
+  constructor(private service: AuthService, private router: Router) {}
 
   ngOnInit(): void {
     this.loginUser();
@@ -22,14 +24,20 @@ export class StudentsComponent implements OnInit {
 
   loginUser() {
     this.service.getStudents().subscribe(
-      (res) => {
+      res => {
         this.students = res;
         console.log(this.students);
         for (let i = 0; i < this.students.length; i++) {
           this.isVisible[i] = true;
         }
       },
-      (err) => console.log(err)
+      err => {
+        if (err instanceof HttpErrorResponse) {
+          if (err.status === 401) {
+            this.router.navigate(['/login']);
+          }
+        }
+      }
     );
   }
 
