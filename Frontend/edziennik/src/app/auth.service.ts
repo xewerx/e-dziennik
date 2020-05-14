@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -7,11 +7,12 @@ import { Observable } from 'rxjs';
 })
 export class AuthService {
 
+  userLogin = '';
 
   private loginUrl = 'http://localhost:3000/api/login';
   private getStudentsUrl = 'http://localhost:3000/api/students';
+  private getRatingsUrl = 'http://localhost:3000/api/ratings';
   private addStudentUrl = 'http://localhost:3000/api/students/add';
-  private editStudentUrl = 'http://localhost:3000/api/students/edit';
   private deleteStudentUrl = 'http://localhost:3000/api/students/delete';
 
   constructor(private http: HttpClient) { }
@@ -20,8 +21,13 @@ export class AuthService {
     return this.http.post<any>(this.loginUrl, user);
   }
 
-  getStudents(): Observable<any> {
+  getStudents(): Observable<JSON> {
     return this.http.get<any>(this.getStudentsUrl);
+  }
+
+  getRatings(loginUser: string): Observable<any> {
+    const parm = new HttpParams().set('login', loginUser + '');
+    return this.http.get<any>(this.getRatingsUrl, {params: parm});
   }
 
   addRating(data: object): Observable<any> {

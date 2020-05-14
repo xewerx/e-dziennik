@@ -1,5 +1,4 @@
-<button class="btn">Wyloguj się!</button>
-
+<div class="welcome">Witaj nauczycielu!</div>
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -8,34 +7,34 @@
         <th scope="col">Nr</th>
         <th scope="col">Imię</th>
         <th scope="col">Nazwisko</th>
-        <th scope="col"></th>
-        <th scope="col"></th>
+        <ng-container *ngFor="let column of countColumnsArray">
+          <th scope="col"></th>
+        </ng-container>
       </tr>
     </thead>
     <tbody>
       <ng-container *ngFor="let student of students; let nr = index">
         <tr>
-          <td class="inputs" [hidden]="isVisible[nr]">
-            <span>Ocena: </span><textarea [(ngModel)]="value[nr]"></textarea>
-            <span>Temat: </span><textarea [(ngModel)]="for[nr]" class="wider"></textarea>
-            <div (click)="saveRating(student.login, nr)" class="btn">
-              Zapisz
-            </div>
-          </td>
           <div class="ikons">
             <div (click)="addRating(nr)" class="btn add"></div>
           </div>
+          <td class="inputs" [hidden]="isVisible[nr]">
+            <span>Ocena: </span><textarea [(ngModel)]="value[nr]"></textarea>
+            <span>Temat: </span><textarea [(ngModel)]="for[nr]" class="wider"></textarea>
+            <div (click)="saveRating(student.login, nr)" class="btn btn-success">
+              Zapisz
+            </div>
+          </td>
           <th scope="row">{{ nr + 1 }}</th>
           <td>{{ student.name }}</td>
           <td>{{ student.surname }}</td>
           <ng-container *ngFor="let value of student.ratings">
-            <td [for]="value.for" [date]="value.date" [idRating]="value._id" [login]="student.login" appShowRating>{{ value.value }}</td>
+            <td [for]="value.for" [date]="value.date" [idRating]="value._id" [login]="student.login" appShowRating>
+              {{ value.value }}
+            </td>
           </ng-container>
         </tr>
       </ng-container>
     </tbody>
   </table>
 </div>
-
-
-

@@ -41,6 +41,8 @@ export class ShowRatingDirective {
   showDeleteConfirm = () => {
     this.question = this.renderer.createElement('p');
     this.yes = this.renderer.createElement('button');
+    this.yes.classList.add('btn');
+    this.yes.classList.add('btn-danger');
     this.question.innerHTML = 'Usunąć ocenę ?';
     this.yes.innerHTML = 'Usuń';
     this.renderer.appendChild(this.el.nativeElement, this.question);

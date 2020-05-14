@@ -5,3 +5,8 @@
 .navbar-brand {
   font-size: 3vh !important;
 }
+
+.btn {
+  position: absolute;
+  right: 1vw;
+}

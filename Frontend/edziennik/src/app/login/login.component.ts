@@ -14,19 +14,25 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
-  constructor(private auth: AuthService, private router: Router) { }
+  constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
   }
 
   loginUser() {
-    this.auth.loginUser(this.loginUserData).subscribe(
+    this.service.loginUser(this.loginUserData).subscribe(
       res => {
-        console.log(res);
         localStorage.setItem('token', res.token);
+        this.service.userLogin = this.loginUserData.login;
+        if (res.status === 'teacher') {
         this.router.navigate(['/students']);
+        } else {
+          this.router.navigate(['/myprofile']);
+        }
+
       },
       err => console.log(err)
+
     );
   }
 

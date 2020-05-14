@@ -1,3 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-info">
-  <a class="navbar-brand" href="#">E-dziennik</a>
+  <a class="navbar-brand" >E-dziennik</a>
+  <ng-container *ngIf="service.loggedIn()">
+  <button class="btn" (click)="logoutUser()">Wyloguj się!</button>
+  </ng-container>
 </nav>

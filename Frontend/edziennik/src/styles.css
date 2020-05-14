@@ -24,15 +24,19 @@ app-login {
   margin: 0 !important;
   position: absolute;
   width: 38vw;
-  top: 25vh;
+  top: 30vh;
   left: 31vw;
   font-family: "DM Mono", monospace;
 }
 
-app-students {
+app-students,app-profile-student {
   position: relative;
-  top: 25vh;
+  top: 15vh;
   margin-left: auto;
   margin-right: auto;
   font-family: "DM Mono", monospace;
+}
+
+app-profile-student {
+  top: 20vh;
 }

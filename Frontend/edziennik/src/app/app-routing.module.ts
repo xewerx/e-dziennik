@@ -2,8 +2,8 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { StudentsComponent } from './students/students.component';
-import { ProfileComponent } from './profile/profile.component';
 import { AuthGuard } from './auth.guard';
+import { ProfileStudentComponent } from './profile-student/profile-student.component';
 
 
 const routes: Routes = [
@@ -22,8 +22,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'profile',
-    component: ProfileComponent
+    path: 'myprofile',
+    component: ProfileStudentComponent
   },
   {
     path: '**',

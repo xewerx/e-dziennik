@@ -12,10 +12,10 @@ import { FooterComponent } from './footer/footer.component';
 import { AuthService } from './auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentsComponent } from './students/students.component';
-import { ProfileComponent } from './profile/profile.component';
 import { ShowRatingDirective } from './show-rating.directive';
 import { AuthGuard } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
+import { ProfileStudentComponent } from './profile-student/profile-student.component';
 
 
 @NgModule({
@@ -25,8 +25,8 @@ import { TokenInterceptorService } from './token-interceptor.service';
     LoginComponent,
     FooterComponent,
     StudentsComponent,
-    ProfileComponent,
     ShowRatingDirective,
+    ProfileStudentComponent,
   ],
   imports: [
     BrowserModule,

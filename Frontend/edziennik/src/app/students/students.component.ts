@@ -12,26 +12,37 @@ export class StudentsComponent implements OnInit {
   isVisible = [];
   students: any = [];
 
+  countColumns = 0;
+  countColumnsArray = [];
   for = [];
   value = [];
 
-
-  constructor(private service: AuthService, private router: Router) {}
+  constructor(public service: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.loginUser();
+    this.getStudents();
   }
 
-  loginUser() {
+  getStudents() {
+    if (localStorage.getItem('login')) {
+      this.service.userLogin = localStorage.getItem('login');
+    }
+
     this.service.getStudents().subscribe(
-      res => {
+      (res) => {
         this.students = res;
-        console.log(this.students);
         for (let i = 0; i < this.students.length; i++) {
+          if (this.students[i].ratings.length > this.countColumns) {
+            this.countColumns = this.students[i].ratings.length;
+          }
+          this.countColumnsArray = Array(this.countColumns).fill(1);
           this.isVisible[i] = true;
         }
+        if (!localStorage.getItem('login')) {
+          localStorage.setItem('login', this.service.userLogin);
+        }
       },
-      err => {
+      (err) => {
         if (err instanceof HttpErrorResponse) {
           if (err.status === 401) {
             this.router.navigate(['/login']);
@@ -47,7 +58,11 @@ export class StudentsComponent implements OnInit {
 
   saveRating(loginAdd: string, index: number) {
     this.isVisible[index] = !this.isVisible[index];
-    const addData = {login: loginAdd, forAdd: this.for[index], ratingAdd: this.value[index]};
+    const addData = {
+      login: loginAdd,
+      forAdd: this.for[index],
+      ratingAdd: this.value[index],
+    };
 
     this.service.addRating(addData).subscribe(
       (res) => {
@@ -59,7 +74,4 @@ export class StudentsComponent implements OnInit {
     );
     window.location.reload();
   }
-
 }
-
-
