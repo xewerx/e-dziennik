@@ -12,6 +12,7 @@
               <label>Hasło</label>
               <input type="password" [(ngModel)]="loginUserData.password" class="form-control rounded-0" name="password" required>
             </div>
+            <div class = "invalidData">{{invalidData}}</div>
             <button type="button" (click)="loginUser()" class="btn btn-success float-right">Zaloguj się</button>
           </form>
         </div>

@@ -59,7 +59,7 @@ router.get("/students", verifyTokenTeacher, (req, res) => {
 });
 
 router.get("/ratings", verifyTokenStudent, (req, res) => {
-  Students.find({login: req.query.login}).then((data) => {
+  Students.find({ login: req.query.login }).then((data) => {
     res.jsonp(data);
   });
 });
@@ -95,7 +95,7 @@ router.post("/students/add", verifyTokenTeacher, (req, res) => {
           }
         );
       } else {
-        res.status(400).send("Podaj prawidłową wartość oceny");
+        res.status(400).send("Podaj prawidłową wartość oceny!");
       }
     }
   });
@@ -107,8 +107,11 @@ router.delete("/students/delete", verifyTokenTeacher, (req, res) => {
     { login: req.body.login },
     { $pull: { ratings: { _id: req.body.id } } },
     (err, user) => {
-      console.log(err);
-      console.log(user);
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(user);
+      }
     }
   );
 });
@@ -120,9 +123,9 @@ router.post("/login", (req, res) => {
       console.log(err);
     } else {
       if (!user) {
-        res.status(401).send("Invalid Login");
+        res.status(401).send("Nieprawidłowy login lub hasło!");
       } else if (user.password !== userData.password) {
-        res.status(401).send("Invalid Password");
+        res.status(401).send("Nieprawidłowy login lub hasło!");
       } else {
         let status = user.status;
         if (status === "teacher") {
@@ -133,8 +136,7 @@ router.post("/login", (req, res) => {
           let payload = { subject: userData._id };
           let token = jwt.sign(payload, "verySecretKeyStudent");
           res.status(200).send({ token });
-        } else 
-        res.status(401).send("Something went wrong");
+        } else res.status(401).send("Something went wrong");
       }
     }
   });

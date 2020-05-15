@@ -17,6 +17,8 @@ export class StudentsComponent implements OnInit {
   for = [];
   value = [];
 
+  invalidRating = '';
+
   constructor(public service: AuthService, private router: Router) {}
 
   ngOnInit(): void {
@@ -35,9 +37,11 @@ export class StudentsComponent implements OnInit {
           if (this.students[i].ratings.length > this.countColumns) {
             this.countColumns = this.students[i].ratings.length;
           }
-          this.countColumnsArray = Array(this.countColumns).fill(1);
           this.isVisible[i] = true;
         }
+
+        this.countColumnsArray = Array(this.countColumns).fill(1);
+
         if (!localStorage.getItem('login')) {
           localStorage.setItem('login', this.service.userLogin);
         }
@@ -57,21 +61,32 @@ export class StudentsComponent implements OnInit {
   }
 
   saveRating(loginAdd: string, index: number) {
-    this.isVisible[index] = !this.isVisible[index];
-    const addData = {
-      login: loginAdd,
-      forAdd: this.for[index],
-      ratingAdd: this.value[index],
-    };
+    if (
+      this.value[index] === 1 ||
+      this.value[index] === 2 ||
+      this.value[index] === 3 ||
+      this.value[index] === 4 ||
+      this.value[index] === 5 ||
+      this.value[index] === 6
+    ) {
+      this.isVisible[index] = !this.isVisible[index];
+      const addData = {
+        login: loginAdd,
+        forAdd: this.for[index],
+        ratingAdd: this.value[index],
+      };
 
-    this.service.addRating(addData).subscribe(
-      (res) => {
-        console.log(res);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-    window.location.reload();
+      this.service.addRating(addData).subscribe(
+        (res) => {
+          console.log(res);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+      window.location.reload();
+    } else {
+      this.invalidRating = 'Podaj prawidłową ocenę!';
+    }
   }
 }

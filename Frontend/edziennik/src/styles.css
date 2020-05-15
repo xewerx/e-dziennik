@@ -7,6 +7,10 @@ body {
   font-family: "DM Mono", monospace;
 }
 
+.invalidData{
+  color: red;
+}
+
 app-navbar {
   font-family: "Anton", sans-serif;
 }

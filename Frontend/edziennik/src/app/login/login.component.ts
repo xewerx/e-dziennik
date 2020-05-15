@@ -14,6 +14,8 @@ export class LoginComponent implements OnInit {
     password: ''
   };
 
+  invalidData = '';
+
   constructor(private service: AuthService, private router: Router) { }
 
   ngOnInit(): void {
@@ -31,8 +33,10 @@ export class LoginComponent implements OnInit {
         }
 
       },
-      err => console.log(err)
-
+      err => {
+        this.invalidData = err.error;
+        this.loginUserData.password = '';
+      }
     );
   }
 
