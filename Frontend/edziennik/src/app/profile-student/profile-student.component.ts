@@ -19,17 +19,15 @@ export class ProfileStudentComponent implements OnInit {
   getRatings() {
 
     if (localStorage.getItem('login')) {
-      console.log(localStorage.getItem('login'));
       this.service.userLogin = localStorage.getItem('login');
     }
 
     this.service.getRatings(this.service.userLogin).subscribe(
       res => {
-        this.ratings = res;
+        [this.ratings] = res;
         if (!localStorage.getItem('login')) {
         localStorage.setItem('login', this.service.userLogin);
         }
-        console.log(this.ratings[0].ratings);
       },
       err => {
         if (err instanceof HttpErrorResponse) {

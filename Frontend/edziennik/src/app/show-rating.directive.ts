@@ -1,11 +1,16 @@
-import { Directive, Input, ElementRef, Renderer2, HostListener } from '@angular/core';
+import {
+  Directive,
+  Input,
+  ElementRef,
+  Renderer2,
+  HostListener,
+} from '@angular/core';
 import { AuthService } from './auth.service';
 
 @Directive({
-  selector: '[appShowRating]'
+  selector: '[appShowRating]',
 })
 export class ShowRatingDirective {
-
   @Input()
   private date = '';
 
@@ -24,8 +29,9 @@ export class ShowRatingDirective {
   private yes: any;
   private question: any;
 
+  private questionIsSet = false;
 
-  deleteButtonFunction = () =>  {
+  deleteButtonFunction = () => {
     this.service.deleteRating(this.idRating, this.login).subscribe(
       (res) => {
         console.log(res);
@@ -49,9 +55,14 @@ export class ShowRatingDirective {
     this.renderer.appendChild(this.el.nativeElement, this.yes);
     this.yes.addEventListener('click', this.deleteButtonFunction);
     this.deleteButton.removeEventListener('click', this.showDeleteConfirm);
+    this.questionIsSet = true;
   }
 
-  constructor(private service: AuthService, private el: ElementRef, private renderer: Renderer2) {
+  constructor(
+    private service: AuthService,
+    private el: ElementRef,
+    private renderer: Renderer2
+  ) {
     this.paragraph = this.renderer.createElement('p');
     this.deleteButton = this.renderer.createElement('div');
     this.deleteButton.classList.add('btn');
@@ -70,9 +81,11 @@ export class ShowRatingDirective {
   mouseleave(event: Event) {
     this.renderer.removeChild(this.el.nativeElement, this.paragraph);
     this.renderer.removeChild(this.el.nativeElement, this.deleteButton);
-    this.renderer.removeChild(this.el.nativeElement, this.question);
-    this.renderer.removeChild(this.el.nativeElement, this.yes);
+    if (this.questionIsSet) {
+      this.renderer.removeChild(this.el.nativeElement, this.question);
+      this.renderer.removeChild(this.el.nativeElement, this.yes);
+      this.questionIsSet = false;
+    }
     this.deleteButton.removeEventListener('click', this.showDeleteConfirm);
   }
-
 }

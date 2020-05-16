@@ -17,7 +17,7 @@ export class StudentsComponent implements OnInit {
   for = [];
   value = [];
 
-  invalidRating = '';
+  invalidRating = [];
 
   constructor(public service: AuthService, private router: Router) {}
 
@@ -62,12 +62,18 @@ export class StudentsComponent implements OnInit {
 
   saveRating(loginAdd: string, index: number) {
     if (
-      this.value[index] === 1 ||
-      this.value[index] === 2 ||
-      this.value[index] === 3 ||
-      this.value[index] === 4 ||
-      this.value[index] === 5 ||
-      this.value[index] === 6
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 1 ||
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 2 ||
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 3 ||
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 4 ||
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 5 ||
+      // tslint:disable-next-line: triple-equals
+      this.value[index] == 6
     ) {
       this.isVisible[index] = !this.isVisible[index];
       const addData = {
@@ -86,7 +92,7 @@ export class StudentsComponent implements OnInit {
       );
       window.location.reload();
     } else {
-      this.invalidRating = 'Podaj prawidłową ocenę!';
+      this.invalidRating[index] = 'Podaj prawidłową ocenę!';
     }
   }
 }

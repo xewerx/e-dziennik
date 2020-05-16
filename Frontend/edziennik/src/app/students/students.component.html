@@ -25,7 +25,7 @@
             <div (click)="saveRating(student.login, nr)" class="btn btn-success">
               Zapisz
             </div>
-            <div class = "invalidData">{{invalidRating}}</div>
+            <div class = "invalidData">{{invalidRating[nr]}}</div>
           </td>
           <th scope="row">{{ nr + 1 }}</th>
           <td>{{ student.name }}</td>

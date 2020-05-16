@@ -1,4 +1,4 @@
-<div class="welcome">Witaj {{ratings[0].name}}!</div>
+<div class="welcome">Witaj {{ratings.name}}!</div>
 <div class="container">
   <table class="table">
     <thead class="thead-dark">
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let rating of ratings[0].ratings; let nr = index">
+      <ng-container *ngFor="let rating of ratings.ratings; let nr = index">
         <tr>
           <td>{{ rating.value }}</td>
           <td>{{ rating.for }}</td>
