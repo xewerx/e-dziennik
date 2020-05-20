@@ -1,26 +1,22 @@
 const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
-const jwt = require("jsonwebtoken");
 
-const User = require("../models/user");
-const Students = require("../models/students");
 
 const Controller = require('../controllers/controller');
 
 const db =
-  "mongodb+srv://admin:admin@cluster0-tigrh.mongodb.net/eventsdb?retryWrites=true&w=majority";
+    "mongodb+srv://admin:admin@cluster0-tigrh.mongodb.net/eventsdb?retryWrites=true&w=majority";
 
 mongoose.connect(
-  db,
-  { useNewUrlParser: true, useUnifiedTopology: true },
-  function (err) {
-    if (err) {
-      console.error("Error! " + err);
-    } else {
-      console.log("Connected to mongodb");
+    db, { useNewUrlParser: true, useUnifiedTopology: true },
+    function(err) {
+        if (err) {
+            console.error("Error! " + err);
+        } else {
+            console.log("Connected to mongodb");
+        }
     }
-  }
 );
 
 

@@ -2,8 +2,9 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { StudentsComponent } from './students/students.component';
-import { AuthGuard } from './auth.guard';
+import { AuthGuardStudents } from './auth.guard';
 import { ProfileStudentComponent } from './profile-student/profile-student.component';
+import { AuthGuardLogin } from './auth.guardLogin';
 
 
 const routes: Routes = [
@@ -14,12 +15,13 @@ const routes: Routes = [
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
+    canActivate: [AuthGuardLogin]
   },
   {
     path: 'students',
     component: StudentsComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuardStudents]
   },
   {
     path: 'myprofile',

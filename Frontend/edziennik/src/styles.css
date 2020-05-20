@@ -1,46 +1,77 @@
 body {
-  height: 100vh;
-  background-image: url(assets/background2.jpg);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  font-family: "DM Mono", monospace;
+    height: 100vh;
+    background-image: url(assets/background2.jpg);
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    font-family: "DM Mono", monospace;
 }
 
-.invalidData{
-  color: red;
+.invalidData {
+    color: red;
 }
 
 app-navbar {
-  font-family: "Anton", sans-serif;
+    font-family: "Anton", sans-serif;
 }
+
 app-footer {
-  width: 100vw;
-  text-align: center;
-  position: fixed;
-  padding: 1vh;
-  bottom: 0;
-  font-family: "DM Mono", monospace;
-  background-color: rgb(73, 73, 78);
+    width: 100vw;
+    text-align: center;
+    position: fixed;
+    padding: 1vh;
+    bottom: 0;
+    font-family: "DM Mono", monospace;
+    background-color: rgb(73, 73, 78);
+    font-size: 15px;
 }
 
 app-login {
-  margin: 0 !important;
-  position: absolute;
-  width: 38vw;
-  top: 30vh;
-  left: 31vw;
-  font-family: "DM Mono", monospace;
+    margin: 0 !important;
+    position: absolute;
+    width: 38vw;
+    top: 30vh;
+    left: 31vw;
+    font-family: "DM Mono", monospace;
 }
 
-app-students,app-profile-student {
-  position: relative;
-  top: 15vh;
-  margin-left: auto;
-  margin-right: auto;
-  font-family: "DM Mono", monospace;
+app-students,
+app-profile-student {
+    position: relative;
+    top: 15vh;
+    margin: auto auto;
+    font-family: "DM Mono", monospace;
 }
 
 app-profile-student {
-  top: 20vh;
+    top: 20vh;
+}
+
+@media (max-width: 1500px) {
+    app-students .container,
+    app-profile-student {
+        width: 70vw;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 600px) {
+    app-footer {
+        font-size: 10px;
+    }
+    app-login {
+        width: 70vw;
+        top: 30vh;
+        left: 15vw;
+    }
+    app-students .container,
+    app-profile-student {}
+}
+
+@media (max-width: 370px) {
+    app-footer {
+        font-size: 7px;
+    }
+    app-login .mb-0 {
+        font-size: 23px;
+    }
 }

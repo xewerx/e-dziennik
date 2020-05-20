@@ -5,16 +5,21 @@ import { AuthService } from './auth.service';
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuardStudents implements CanActivate {
+export class AuthGuardLogin implements CanActivate {
 
   constructor(private service: AuthService, private router: Router) { }
 
   canActivate(): boolean {
-    if (this.service.loggedIn()) {
+    if (!this.service.loggedIn()) {
       return true;
     } else {
-      this.router.navigate(['/login']);
-      return false;
+      if (this.service.whoIsLogged === 'teacher') {
+        this.router.navigate(['/students']);
+        return false;
+      } else {
+          this.router.navigate(['/myprofile']);
+          return false;
+        }
     }
   }
 }

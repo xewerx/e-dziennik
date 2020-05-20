@@ -1,42 +1,42 @@
 <div class="welcome">Witaj nauczycielu!</div>
 <div class="container">
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col"></th>
-        <th scope="col">Nr</th>
-        <th scope="col">Imię</th>
-        <th scope="col">Nazwisko</th>
-        <ng-container *ngFor="let column of countColumnsArray">
-          <th scope="col"></th>
-        </ng-container>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let student of students; let nr = index">
-        <tr>
-          <div class="ikons">
-            <div (click)="addRating(nr)" class="btn add"></div>
-          </div>
-          <td class="inputs" [hidden]="isVisible[nr]">
-            <span>Ocena: </span><textarea [(ngModel)]="value[nr]"></textarea>
-            <span>Temat: </span><textarea [(ngModel)]="for[nr]" class="wider"></textarea>
+    <table class="table">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col"></th>
+                <th scope="col">Nr</th>
+                <th scope="col">Imię</th>
+                <th scope="col">Nazwisko</th>
+                <ng-container *ngFor="let column of countColumnsArray">
+                    <th scope="col"></th>
+                </ng-container>
+            </tr>
+        </thead>
+        <tbody>
+            <ng-container *ngFor="let student of students; let nr = index">
+                <tr>
+                    <div class="ikons">
+                        <div (click)="addRating(nr)" class="btn add"></div>
+                    </div>
+                    <td class="inputs" [hidden]="isVisible[nr]">
+                        <span>Ocena: </span><textarea [(ngModel)]="value[nr]"></textarea>
+                        <span>Temat: </span><textarea [(ngModel)]="for[nr]" class="wider"></textarea>
 
-            <div (click)="saveRating(student.login, nr)" class="btn btn-success">
-              Zapisz
-            </div>
-            <div class = "invalidData">{{invalidRating[nr]}}</div>
-          </td>
-          <th scope="row">{{ nr + 1 }}</th>
-          <td>{{ student.name }}</td>
-          <td>{{ student.surname }}</td>
-          <ng-container *ngFor="let rating of student.ratings">
-            <td [for]="rating.for" [date]="rating.date" [idRating]="rating._id" [login]="student.login" appShowRating>
-              {{ rating.value }}
-            </td>
-          </ng-container>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
+                        <div (click)="saveRating(student.login, nr)" class="btn btn-success save">
+                            Zapisz
+                        </div>
+                        <div class="invalidData">{{invalidRating[nr]}}</div>
+                    </td>
+                    <th scope="row">{{ nr + 1 }}</th>
+                    <td>{{ student.name }}</td>
+                    <td>{{ student.surname }}</td>
+                    <ng-container *ngFor="let rating of student.ratings">
+                        <td [for]="rating.for" [date]="rating.date" [idRating]="rating._id" [login]="student.login" appShowRating>
+                            {{ rating.value }}
+                        </td>
+                    </ng-container>
+                </tr>
+            </ng-container>
+        </tbody>
+    </table>
 </div>

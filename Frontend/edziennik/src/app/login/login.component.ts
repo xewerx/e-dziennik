@@ -27,8 +27,10 @@ export class LoginComponent implements OnInit {
         localStorage.setItem('token', res.token);
         this.service.userLogin = this.loginUserData.login;
         if (res.status === 'teacher') {
+        this.service.whoIsLogged = res.status;
         this.router.navigate(['/students']);
         } else {
+          this.service.whoIsLogged = res.status;
           this.router.navigate(['/myprofile']);
         }
 

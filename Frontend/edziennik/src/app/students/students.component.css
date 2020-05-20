@@ -1,60 +1,59 @@
 .add {
-  background-image: url(src/assets/add.png);
+    background-image: url(src/assets/add.png);
 }
 
 .edit {
-  background-image: url(src/assets/edit.png);
+    background-image: url(src/assets/edit.png);
 }
 
 .delete {
-  background-image: url(src/assets/delete.png);
+    background-image: url(src/assets/delete.png);
 }
 
 .btn {
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
-  -moz-background-size: 100% 100%;
-  margin-left: 0.5vw;
-  position: relative;
-  top: 0;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    margin-left: 0.5vw;
+    position: relative;
+    top: 0;
 }
 
 .btn:hover {
-  transform: scale(0.9);
+    transform: scale(0.9);
 }
 
 textarea {
-  line-height: 1.5;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-  box-shadow: 1px 1px 1px #999;
-  width: 2vw;
-  height: 3vh;
-  resize: none;
-  overflow: hidden;
+    line-height: 1.5;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    box-shadow: 1px 1px 1px #999;
+    width: 2vw;
+    height: 3vh;
+    resize: none;
+    overflow: hidden;
 }
 
 .wider {
-  width: 8vw;
+    width: 8vw;
 }
 
 .ikons {
-  display: inline-block;
-  position: relative;
-
+    display: inline-block;
+    position: relative;
 }
 
-span{
-  position: relative;
-  margin-left: 0.5vw;
+span {
+    position: relative;
+    margin-left: 0.5vw;
 }
 
 .inputs {
-  display: inline-block;
+    display: inline-block;
 }
 
 .welcome {
-  text-align: center ;
-  padding-bottom: 3vh;
-  font-size: 40px;
+    text-align: center;
+    padding-bottom: 3vh;
+    font-size: 3vw;
 }

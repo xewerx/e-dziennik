@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   userLogin = '';
+  whoIsLogged = '';
 
   private loginUrl = 'http://localhost:3000/api/login';
   private getStudentsUrl = 'http://localhost:3000/api/students';

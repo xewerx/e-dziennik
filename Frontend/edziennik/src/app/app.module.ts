@@ -13,7 +13,7 @@ import { AuthService } from './auth.service';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { StudentsComponent } from './students/students.component';
 import { ShowRatingDirective } from './show-rating.directive';
-import { AuthGuard } from './auth.guard';
+import { AuthGuardStudents } from './auth.guard';
 import { TokenInterceptorService } from './token-interceptor.service';
 import { ProfileStudentComponent } from './profile-student/profile-student.component';
 
@@ -34,7 +34,7 @@ import { ProfileStudentComponent } from './profile-student/profile-student.compo
     HttpClientModule,
     FormsModule
   ],
-  providers: [AuthService, AuthGuard,
+  providers: [AuthService, AuthGuardStudents,
   {
     provide: HTTP_INTERCEPTORS,
     useClass: TokenInterceptorService,
