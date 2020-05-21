@@ -48,7 +48,8 @@ app-profile-student {
 
 @media (max-width: 1500px) {
     app-students .container,
-    app-profile-student {
+    app-profile-student .container {
+        overflow-x: auto;
         width: 70vw;
         font-size: 11px;
     }
@@ -63,8 +64,6 @@ app-profile-student {
         top: 30vh;
         left: 15vw;
     }
-    app-students .container,
-    app-profile-student {}
 }
 
 @media (max-width: 370px) {

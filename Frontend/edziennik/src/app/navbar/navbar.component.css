@@ -1,12 +1,23 @@
 .navbar {
-  border-bottom: 1px solid black;
+    border-bottom: 1px solid black;
 }
 
 .navbar-brand {
-  font-size: 3vh !important;
+    font-size: 3vh !important;
 }
 
-.btn {
-  position: absolute;
-  right: 1vw;
+.logoutAndTimer {
+    display: inline-flex;
+    position: absolute;
+    right: 1vw;
+    font-size: 1.5vh;
+}
+
+.timer {
+    margin-right: 1vh;
+}
+
+.logout:hover {
+    cursor: pointer;
+    transform: scale(0.9);
 }

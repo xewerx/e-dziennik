@@ -23,19 +23,18 @@
     transform: scale(0.9);
 }
 
-textarea {
+input {
     line-height: 1.5;
     border-radius: 5px;
     border: 1px solid #ccc;
     box-shadow: 1px 1px 1px #999;
-    width: 2vw;
+    width: 1vw;
     height: 3vh;
-    resize: none;
-    overflow: hidden;
+    margin-bottom: 1vh;
 }
 
 .wider {
-    width: 8vw;
+    width: auto;
 }
 
 .ikons {
@@ -56,4 +55,28 @@ span {
     text-align: center;
     padding-bottom: 3vh;
     font-size: 3vw;
+}
+
+@media (max-width: 1325px) {
+    input {
+        width: 2vw;
+    }
+}
+
+@media (max-width: 800px) {
+    .welcome {
+        font-size: 4vw;
+    }
+}
+
+@media (max-width: 580px) {
+    input {
+        width: 3vw;
+    }
+}
+
+@media (max-width: 400px) {
+    input {
+        width: 4vw;
+    }
 }

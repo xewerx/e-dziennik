@@ -1,9 +1,15 @@
 .welcome {
-  text-align: center ;
-  padding-bottom: 3vh;
-  font-size: 40px;
+    text-align: center;
+    padding-bottom: 3vh;
+    font-size: 3vw;
 }
 
 .table {
-  text-align: center;
+    text-align: center;
+}
+
+@media (max-width: 800px) {
+    .welcome {
+        font-size: 5vw;
+    }
 }
