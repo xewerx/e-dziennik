@@ -23,6 +23,12 @@ export class ShowRatingDirective {
   @Input()
   private login = '';
 
+  @Input()
+  private indexStudent = '';
+
+  @Input()
+  private indexRating = '';
+
   private paragraph: any;
   private deleteButton: any;
 
@@ -32,6 +38,7 @@ export class ShowRatingDirective {
   private questionIsSet = false;
 
   deleteButtonFunction = () => {
+    this.service.students[this.indexStudent].ratings.splice(this.indexRating, 1);
     this.service.deleteRating(this.idRating, this.login).subscribe(
       (res) => {
         console.log(res);
@@ -40,7 +47,6 @@ export class ShowRatingDirective {
         console.log(err);
       }
     );
-    window.location.reload();
     this.yes.removeEventListener('click', this.deleteButtonFunction);
   }
 
@@ -71,7 +77,7 @@ export class ShowRatingDirective {
 
   @HostListener('mouseenter')
   mouseenter(event: Event) {
-    this.paragraph.innerHTML = this.for + ' ' + this.date.slice(0, 10);
+    this.paragraph.innerHTML = this.for + ' ' + this.date.toString().slice(0, 10);
     this.renderer.appendChild(this.el.nativeElement, this.paragraph);
     this.renderer.appendChild(this.el.nativeElement, this.deleteButton);
     this.deleteButton.addEventListener('click', this.showDeleteConfirm);

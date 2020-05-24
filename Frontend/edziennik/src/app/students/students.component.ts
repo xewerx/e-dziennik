@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class StudentsComponent implements OnInit {
   isVisible = [];
-  students: any = [];
 
   countColumns = 0;
   countColumnsArray = [];
@@ -32,10 +31,10 @@ export class StudentsComponent implements OnInit {
 
     this.service.getStudents().subscribe(
       (res) => {
-        this.students = res;
-        for (let i = 0; i < this.students.length; i++) {
-          if (this.students[i].ratings.length > this.countColumns) {
-            this.countColumns = this.students[i].ratings.length;
+        this.service.students = res;
+        for (let i = 0; i < this.service.students.length; i++) {
+          if (this.service.students[i].ratings.length > this.countColumns) {
+            this.countColumns = this.service.students[i].ratings.length;
           }
           this.isVisible[i] = true;
         }
@@ -82,15 +81,19 @@ export class StudentsComponent implements OnInit {
         ratingAdd: this.value[index],
       };
 
-      this.service.addRating(addData).subscribe(
-        (res) => {
-          console.log(res);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-      window.location.reload();
+
+      this.service.students[index].ratings.push({
+        value: this.value[index],
+        for: this.for[index],
+        date: new Date().toLocaleDateString()
+      });
+
+      this.service.addRating(addData).subscribe((res) => {
+        // console.log(res);
+      }, (err) => {
+        // console.log(err);
+      });
+
     } else {
       this.invalidRating[index] = 'Podaj prawidłową ocenę!';
     }

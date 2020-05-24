@@ -9,12 +9,13 @@ export class AuthService {
 
   userLogin = '';
   whoIsLogged = '';
+  students: any = [];
 
-  private loginUrl = 'http://localhost:3000/api/login';
-  private getStudentsUrl = 'http://localhost:3000/api/students';
-  private getRatingsUrl = 'http://localhost:3000/api/ratings';
-  private addStudentUrl = 'http://localhost:3000/api/students/add';
-  private deleteStudentUrl = 'http://localhost:3000/api/students/delete';
+  private loginUrl = 'https://polar-tundra-69590.herokuapp.com/api/login';
+  private getStudentsUrl = 'https://polar-tundra-69590.herokuapp.com/api/students';
+  private getRatingsUrl = 'https://polar-tundra-69590.herokuapp.com/api/ratings';
+  private addStudentUrl = 'https://polar-tundra-69590.herokuapp.com/api/students/add';
+  private deleteStudentUrl = 'https://polar-tundra-69590.herokuapp.com/api/students/delete';
 
   constructor(private http: HttpClient) { }
 

@@ -13,29 +13,29 @@
             </tr>
         </thead>
         <tbody>
-            <ng-container *ngFor="let student of students; let nr = index">
+            <ng-container *ngFor="let student of this.service.students; let nrStudent = index">
                 <tr>
                     <div class="ikons">
-                        <div (click)="addRating(nr)" class="btn add"></div>
+                        <div (click)="addRating(nrStudent)" class="btn add"></div>
                     </div>
-                    <td class="inputs" [hidden]="isVisible[nr]">
+                    <td class="inputs" [hidden]="isVisible[nrStudent]">
                         <div>
-                            <span>Ocena: </span><input type="text" [(ngModel)]="value[nr]" class="input" />
+                            <span>Ocena: </span><input type="text" [(ngModel)]="value[nrStudent]" class="input" />
                         </div>
                         <div>
-                            <span>Temat: </span><input type="text" [(ngModel)]="for[nr]" class="input wider" />
+                            <span>Temat: </span><input type="text" [(ngModel)]="for[nrStudent]" class="input wider" />
                         </div>
 
-                        <div (click)="saveRating(student.login, nr)" class="btn btn-success save">
+                        <div (click)="saveRating(student.login, nrStudent)" class="btn btn-success save">
                             Zapisz
                         </div>
-                        <div class="invalidData">{{ invalidRating[nr] }}</div>
+                        <div class="invalidData">{{ invalidRating[nrStudent] }}</div>
                     </td>
-                    <th scope="row">{{ nr + 1 }}</th>
+                    <th scope="row">{{ nrStudent + 1 }}</th>
                     <td>{{ student.name }}</td>
                     <td>{{ student.surname }}</td>
-                    <ng-container *ngFor="let rating of student.ratings">
-                        <td [for]="rating.for" [date]="rating.date" [idRating]="rating._id" [login]="student.login" appShowRating>
+                    <ng-container *ngFor="let rating of student.ratings; let nrRating = index">
+                        <td [indexRating]="nrRating" [indexStudent]="nrStudent" [for]="rating.for" [date]="rating.date" [idRating]="rating._id" [login]="student.login" appShowRating>
                             {{ rating.value }}
                         </td>
                     </ng-container>
