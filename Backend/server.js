@@ -11,10 +11,10 @@ app.use(bodyParser.json());
 
 app.use('/api', api)
 
-app.get('/', function(req, res){
-    res.send("dupa");
+app.get('/', function(req, res) {
+    res.send("Witam");
 });
 
-app.listen(PORT, function(){
+app.listen(PORT, function() {
     console.log('Server is running at port: ' + PORT);
 })
