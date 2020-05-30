@@ -8,6 +8,7 @@ import { Observable } from 'rxjs';
 export class AuthService {
 
   userLogin = '';
+  spinner = true;
   whoIsLogged = '';
   students: any = [];
 

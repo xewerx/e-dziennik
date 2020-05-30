@@ -1,46 +1,75 @@
 <div class="welcome">Witaj nauczycielu!</div>
 <div class="container">
-    <table class="table">
-        <thead class="thead-dark">
-            <tr>
-                <th scope="col"></th>
-                <th scope="col">Nr</th>
-                <th scope="col">Imię</th>
-                <th scope="col">Nazwisko</th>
-                <ng-container *ngFor="let column of countColumnsArray">
-                    <th scope="col"></th>
-                </ng-container>
-            </tr>
-        </thead>
-        <tbody>
-            <ng-container *ngFor="let student of this.service.students; let nrStudent = index">
+    <ng-container *ngIf="service.spinner then spinner else table"></ng-container>
+    <ng-template #spinner>
+        <div class="spinner-border text-primary" role="status"></div>
+    </ng-template>
+    <ng-template #table>
+        <table #data class="table">
+            <thead class="thead-dark">
                 <tr>
-                    <div class="ikons">
-                        <div (click)="addRating(nrStudent)" class="btn add"></div>
-                    </div>
-                    <td class="inputs" [hidden]="isVisible[nrStudent]">
-                        <div>
-                            <span>Ocena: </span><input type="text" [(ngModel)]="value[nrStudent]" class="input" />
-                        </div>
-                        <div>
-                            <span>Temat: </span><input type="text" [(ngModel)]="for[nrStudent]" class="input wider" />
-                        </div>
-
-                        <div (click)="saveRating(student.login, nrStudent)" class="btn btn-success save">
-                            Zapisz
-                        </div>
-                        <div class="invalidData">{{ invalidRating[nrStudent] }}</div>
-                    </td>
-                    <th scope="row">{{ nrStudent + 1 }}</th>
-                    <td>{{ student.name }}</td>
-                    <td>{{ student.surname }}</td>
-                    <ng-container *ngFor="let rating of student.ratings; let nrRating = index">
-                        <td [indexRating]="nrRating" [indexStudent]="nrStudent" [for]="rating.for" [date]="rating.date" [idRating]="rating._id" [login]="student.login" appShowRating>
-                            {{ rating.value }}
-                        </td>
+                    <th scope="col"></th>
+                    <th scope="col">Nr</th>
+                    <th scope="col">Imię</th>
+                    <th scope="col">Nazwisko</th>
+                    <ng-container *ngFor="let column of countColumnsArray">
+                        <th scope="col"></th>
                     </ng-container>
                 </tr>
-            </ng-container>
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let student of this.service.students; let nrStudent = index">
+                    <tr>
+                        <div class="ikons">
+                            <div (click)="addRating(nrStudent)" class="btn add"></div>
+                        </div>
+                        <td class="inputs" [hidden]="isVisible[nrStudent]">
+                            <div>
+                                <span>Ocena: </span
+              ><input
+                type="text"
+                [(ngModel)]="value[nrStudent]"
+                class="input"
+              />
+            </div>
+            <div>
+              <span>Temat: </span
+              ><input
+                type="text"
+                [(ngModel)]="for[nrStudent]"
+                class="input wider"
+              />
+            </div>
+
+            <div
+              (click)="saveRating(student.login, nrStudent)"
+              class="btn btn-success save"
+            >
+              Zapisz
+            </div>
+            <div class="invalidData">{{ invalidRating[nrStudent] }}</div>
+          </td>
+          <th scope="row">{{ nrStudent + 1 }}</th>
+          <td>{{ student.name }}</td>
+          <td>{{ student.surname }}</td>
+          <ng-container
+            *ngFor="let rating of student.ratings; let nrRating = index"
+          >
+            <td
+              [indexRating]="nrRating"
+              [indexStudent]="nrStudent"
+              [for]="rating.for"
+              [date]="rating.date"
+              [idRating]="rating._id"
+              [login]="student.login"
+              appShowRating
+            >
+              {{ rating.value }}
+            </td>
+          </ng-container>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+</ng-template>
 </div>

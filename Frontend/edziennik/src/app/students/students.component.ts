@@ -3,6 +3,7 @@ import { AuthService } from '../auth.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+
 @Component({
   selector: 'app-students',
   templateUrl: './students.component.html',
@@ -18,7 +19,9 @@ export class StudentsComponent implements OnInit {
 
   invalidRating = [];
 
-  constructor(public service: AuthService, private router: Router) {}
+  constructor(public service: AuthService, private router: Router) {
+    this.service.spinner = true;
+  }
 
   ngOnInit(): void {
     this.getStudents();
@@ -44,6 +47,8 @@ export class StudentsComponent implements OnInit {
         if (!localStorage.getItem('login')) {
           localStorage.setItem('login', this.service.userLogin);
         }
+
+        this.service.spinner = false;
       },
       (err) => {
         if (err instanceof HttpErrorResponse) {

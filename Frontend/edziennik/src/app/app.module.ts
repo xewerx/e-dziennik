@@ -18,6 +18,7 @@ import { TokenInterceptorService } from './token-interceptor.service';
 import { ProfileStudentComponent } from './profile-student/profile-student.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,

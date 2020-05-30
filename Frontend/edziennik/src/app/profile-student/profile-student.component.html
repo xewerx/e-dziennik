@@ -1,21 +1,27 @@
-<div class="welcome">Witaj {{ratings.name}}!</div>
+<div class="welcome">Witaj {{ ratings.name }}!</div>
 <div class="container">
-  <table class="table">
-    <thead class="thead-dark">
-      <tr>
-        <th scope="col">Ocena</th>
-        <th scope="col">Temat</th>
-        <th scope="col">Data</th>
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let rating of ratings.ratings; let nr = index">
-        <tr>
-          <td>{{ rating.value }}</td>
-          <td>{{ rating.for }}</td>
-          <td>{{ rating.date | date }}</td>
-        </tr>
-      </ng-container>
-    </tbody>
-  </table>
+    <ng-container *ngIf="service.spinner then spinner else table"></ng-container>
+    <ng-template #spinner>
+        <div class="spinner-border text-primary" role="status"></div>
+    </ng-template>
+    <ng-template #table>
+        <table class="table">
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">Ocena</th>
+                    <th scope="col">Temat</th>
+                    <th scope="col">Data</th>
+                </tr>
+            </thead>
+            <tbody>
+                <ng-container *ngFor="let rating of ratings.ratings; let nr = index">
+                    <tr>
+                        <td>{{ rating.value }}</td>
+                        <td>{{ rating.for }}</td>
+                        <td>{{ rating.date | date }}</td>
+                    </tr>
+                </ng-container>
+            </tbody>
+        </table>
+    </ng-template>
 </div>

@@ -11,7 +11,9 @@ export class ProfileStudentComponent implements OnInit {
 
   ratings: any = [];
   router: any;
-  constructor(public service: AuthService) { }
+  constructor(public service: AuthService) {
+    this.service.spinner = true;
+  }
 
   ngOnInit(): void {
     this.getRatings();
@@ -28,6 +30,7 @@ export class ProfileStudentComponent implements OnInit {
         if (!localStorage.getItem('login')) {
         localStorage.setItem('login', this.service.userLogin);
         }
+        this.service.spinner = false;
       },
       err => {
         if (err instanceof HttpErrorResponse) {

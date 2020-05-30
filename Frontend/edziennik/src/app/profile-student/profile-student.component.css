@@ -8,6 +8,11 @@
     text-align: center;
 }
 
+.spinner-border {
+    position: relative;
+    left: 50%;
+}
+
 @media (max-width: 800px) {
     .welcome {
         font-size: 5vw;
