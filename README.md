@@ -1,5 +1,5 @@
 # e-dziennik
-MEAN project - Currently in this project unfortunately I haven't live view, because I havent VPS serwer and I can't deploy my API.
+MEAN project
 
 
 Application for schools. Profile for student and for teacher.
