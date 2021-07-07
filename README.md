@@ -9,3 +9,5 @@ Application will be develop by me in the future.
 If you want test my app you may login:
 -teacher profil: login: admin password: admin,
 -student profil: login: JurekNowak password: uczen.
+
+!! Now unfortunately my API for this project on Heroku doesn't accesbile.
