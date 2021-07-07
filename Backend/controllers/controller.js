@@ -1,9 +1,8 @@
-const jwt = require("jsonwebtoken");
+import jwt from 'jsonwebtoken';
+import User from '../models/user.js';
+import Student from '../models/students'
 
-const User = require("../models/user");
-const Students = require("../models/students");
-
-exports.verifyTokenTeacher = (req, res, next) => {
+export const verifyTokenTeacher = (req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(401).send("Unauthorized request");
     }
@@ -19,7 +18,7 @@ exports.verifyTokenTeacher = (req, res, next) => {
     next();
 };
 
-exports.verifyTokenStudent = (req, res, next) => {
+export const verifyTokenStudent = (req, res, next) => {
     if (!req.headers.authorization) {
         return res.status(401).send("Unauthorized request");
     }
@@ -35,7 +34,7 @@ exports.verifyTokenStudent = (req, res, next) => {
     next();
 };
 
-exports.deleteRating = (req, res) => {
+export const deleteRating = (req, res) => {
     Students.updateOne({ login: req.body.login }, { $pull: { ratings: { _id: req.body.id } } },
         (err, user) => {
             if (err) {
@@ -47,7 +46,7 @@ exports.deleteRating = (req, res) => {
     );
 };
 
-exports.login = (req, res) => {
+export const login = (req, res) => {
     let userData = req.body;
     User.findOne({ login: userData.login }, (err, user) => {
         if (err) {
@@ -73,7 +72,7 @@ exports.login = (req, res) => {
     });
 };
 
-exports.addRating = (req, res) => {
+export const addRating = (req, res) => {
     let userData = req.body;
     Students.findOne({ login: userData.login }, (err, user) => {
         if (err) {
@@ -108,13 +107,13 @@ exports.addRating = (req, res) => {
     });
 };
 
-exports.getRatings = (req, res) => {
+export const getRatings = (req, res) => {
     Students.find({ login: req.query.login }).then((data) => {
         res.jsonp(data);
     });
 };
 
-exports.getStudents = (req, res) => {
+export const getStudents = (req, res) => {
     Students.find({}).then((data) => {
         res.jsonp(data);
     });

@@ -1,11 +1,10 @@
-const express = require("express");
+import express from 'express';
+import mongoose from 'mongoose';
+import Controller from '../controllers/controller';
+
 const router = express.Router();
-const mongoose = require("mongoose");
 
-
-const Controller = require('../controllers/controller');
-
-const db = "";
+const db = process.env.DB;
 
 mongoose.connect(
     db, { useNewUrlParser: true, useUnifiedTopology: true },

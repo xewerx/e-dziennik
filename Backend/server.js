@@ -1,8 +1,8 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const cors = require('cors');
+import express from 'express';
+import bodyParser from 'body-parser';
+import cors from 'cors';
 
-const PORT = 3000;
+const PORT = process.env.PORT || 5000;
 const api = require('./routes/api');
 const app = express();
 
@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 app.use('/api', api)
 
 app.get('/', function(req, res) {
-    res.send("Witam");
+    res.send("Hello");
 });
 
 app.listen(PORT, function() {

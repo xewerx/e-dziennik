@@ -1,11 +1,9 @@
-const mongoose = require('mongoose');
+import mongoose from 'mongoose';
 
-const Schema = mongoose.Schema;
-
-const studentsSchema = new Schema({
-    login: String,
-    name: String,
-    surname: String,
+const studentSchema = new mongoose.Schema({
+    login: { type: String, required: true },
+    name: { type: String, required: true },
+    surname: { type: String, required: true },
     ratings:[{
         for: String,
         value: String,
@@ -13,4 +11,5 @@ const studentsSchema = new Schema({
     }]
 });
 
-module.exports = mongoose.model('students', studentsSchema, 'IA');
+const Student = mongoose.model("Student", studentSchema);
+export default Student;
