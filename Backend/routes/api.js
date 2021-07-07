@@ -5,8 +5,7 @@ const mongoose = require("mongoose");
 
 const Controller = require('../controllers/controller');
 
-const db =
-    "mongodb+srv://admin:admin@cluster0-tigrh.mongodb.net/eventsdb?retryWrites=true&w=majority";
+const db = "";
 
 mongoose.connect(
     db, { useNewUrlParser: true, useUnifiedTopology: true },
